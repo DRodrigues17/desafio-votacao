@@ -1,0 +1,13 @@
+
+spring:
+  datasource:
+    username: usuario
+    url: jdbc:postgresql://localhost:5432/db-desafio-votacao
+    driverClassName: org.postgresql.Driver
+    password: senha
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+    show-sql: 'false'

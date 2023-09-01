@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  db-desafio:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: db-desafio-votacao
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: senha
+
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - db-desafio:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  db-desafio:
