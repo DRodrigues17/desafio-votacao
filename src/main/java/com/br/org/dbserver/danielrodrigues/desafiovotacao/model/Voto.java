@@ -1,21 +1,19 @@
 package com.br.org.dbserver.danielrodrigues.desafiovotacao.model;
 
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.Decisao;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Setter
 @Getter
 @Builder
-public class Pauta {
+@Entity
+public class Voto {
     @Id
     private Integer id;
-    private String nome;
-    @Lob
-    private String descricao;
-    @Setter
-    private boolean aprovada;
+    private Integer idAssociado;
+    private Decisao decisao;
 }

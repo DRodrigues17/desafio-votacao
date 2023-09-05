@@ -1,4 +1,6 @@
-
+server:
+  servlet:
+    context-path: /v1
 spring:
   datasource:
     username: usuario
