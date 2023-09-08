@@ -1,21 +1,27 @@
 package com.br.org.dbserver.danielrodrigues.desafiovotacao.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPauta;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
-@Builder
 public class Pauta {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
+    private final String nome;
     @Lob
-    private String descricao;
+    private final String descricao;
     @Setter
-    private boolean aprovada;
+    private SituacaoPauta situacao;
+
+    @Builder
+    public Pauta(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.situacao = SituacaoPauta.PARA_VOTAR;
+    }
 }

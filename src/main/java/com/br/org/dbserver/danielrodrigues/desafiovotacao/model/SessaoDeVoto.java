@@ -1,36 +1,50 @@
 package com.br.org.dbserver.danielrodrigues.desafiovotacao.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.Decisao;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPauta;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
 @Entity
 public class SessaoDeVoto {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private final LocalTime horaDeAbertura;
-    private final LocalTime horaDeFechamento;
-    private Integer idDaPauta;
-    @OneToMany
+    private final LocalDateTime horaDeAbertura;
+    private final LocalDateTime horaDeFechamento;
+    private final Integer idDaPauta;
+    @Setter
+    @OneToMany(mappedBy = "sessao")
     private List<Voto> votos;
     private boolean encerrada;
 
-    public SessaoDeVoto(LocalTime horaDeAbertura, LocalTime horaDeFechamento, List<Voto> votos) {
+    @Builder
+    public SessaoDeVoto(LocalDateTime horaDeAbertura, LocalDateTime horaDeFechamento, Integer idDaPauta) {
         this.horaDeAbertura = horaDeAbertura;
         this.horaDeFechamento = horaDeFechamento;
-        this.votos = votos;
-    }
-
-    public SessaoDeVoto(LocalTime horaDeAbertura, List<Voto> votos) {
-        this.horaDeAbertura = horaDeAbertura;
-        this.horaDeFechamento = horaDeAbertura.plusMinutes(1);
-        this.votos = votos;
+        this.idDaPauta = idDaPauta;
     }
 
     public void definirSessaoComoEncerrada() {
-        this.encerrada = LocalTime.now().isAfter(horaDeFechamento);
+        encerrada = true;
+    }
+
+    public SituacaoPauta descobrirResultadoDaVotacao() {
+        int votosNegativos = 0;
+        int votosPositivos = 0;
+        for (Voto voto : votos) {
+            if (voto.getDecisao().equals(Decisao.SIM)) {
+                votosPositivos += 1;
+            } else {
+                votosNegativos += 1;
+            }
+        }
+        return votosPositivos < votosNegativos ? SituacaoPauta.RECUSADA : SituacaoPauta.APROVADA;
     }
 }
