@@ -9,7 +9,7 @@
 ## 2 - executando o projeto
 
 Você não precisa usar docker se não quiser e se tiver o postgres instalado pode só pular
-para os próximos passos e criar um banco seguindo as configurações definidas no docker-compose (nome do banco.
+para os próximos passos e criar um banco seguindo as definições no docker-compose, sendo elas nome do banco, nome do usuário, senha.
 
 Após você clonar ele, você pode abrir um terminal na pasta raiz e executar
 o seguinte comando para ter o banco de dados na sua máquina:
