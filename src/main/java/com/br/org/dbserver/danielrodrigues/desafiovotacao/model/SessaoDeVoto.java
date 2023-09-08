@@ -45,6 +45,6 @@ public class SessaoDeVoto {
                 votosNegativos += 1;
             }
         }
-        return votosPositivos < votosNegativos ? SituacaoPauta.RECUSADA : SituacaoPauta.APROVADA;
+        return votosPositivos <= votosNegativos ? SituacaoPauta.RECUSADA : SituacaoPauta.APROVADA;
     }
 }

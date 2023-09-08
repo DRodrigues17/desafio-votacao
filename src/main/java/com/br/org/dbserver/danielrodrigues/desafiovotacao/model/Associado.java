@@ -6,13 +6,18 @@ import lombok.Getter;
 
 @Getter
 @Entity
-@Builder
 public class Associado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(length = 11)
-    private Long cpf;
+    private final Long cpf;
     @Column(length = 50)
-    private String nome;
+    private final String nome;
+
+    @Builder
+    public Associado(Long cpf, String nome) {
+        this.cpf = cpf;
+        this.nome = nome;
+    }
 }
