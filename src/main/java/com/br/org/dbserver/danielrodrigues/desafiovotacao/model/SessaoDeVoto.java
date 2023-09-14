@@ -4,17 +4,15 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.Decisao;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPauta;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Entity
+@Getter
+@EqualsAndHashCode
 @NoArgsConstructor
 public class SessaoDeVoto {
     @Id

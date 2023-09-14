@@ -2,10 +2,12 @@ package com.br.org.dbserver.danielrodrigues.desafiovotacao.model;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@EqualsAndHashCode
 @Entity
 @NoArgsConstructor
 public class Associado {

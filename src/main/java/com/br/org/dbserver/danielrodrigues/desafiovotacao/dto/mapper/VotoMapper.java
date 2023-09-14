@@ -5,9 +5,11 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.VotoRespo
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Voto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class VotoMapper {
-    public static Voto gerarVoto(VotoRequest request, Associado associado, SessaoDeVoto sessao){
+    public Voto gerarVoto(VotoRequest request, Associado associado, SessaoDeVoto sessao) {
         return Voto.builder()
                 .associado(associado)
                 .sessao(sessao)
@@ -15,7 +17,7 @@ public class VotoMapper {
                 .build();
     }
 
-    public static VotoResponse gerarResponse(Voto voto){
+    public VotoResponse gerarResponse(Voto voto) {
         return VotoResponse.builder()
                 .idAssociado(voto.getAssociado().getId())
                 .idSessao(voto.getSessao().getId())

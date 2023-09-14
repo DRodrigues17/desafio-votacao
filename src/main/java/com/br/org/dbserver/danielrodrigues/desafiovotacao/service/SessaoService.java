@@ -8,28 +8,27 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.exception.ObjetoNaoEnc
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.SessaoRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class SessaoService {
-
-    @Autowired
-    private SessaoRepository sessaoRepository;
-    @Autowired
-    private PautaService pautaService;
+    private final SessaoRepository sessaoRepository;
+    private final PautaService pautaService;
+    private final SessaoMapper mapper;
 
     @Transactional
     public SessaoResponse abrirUmaSessao(SessaoRequest sessaoRequest) {
-        SessaoDeVoto sesao = sessaoRepository.save(SessaoMapper.gerarSessao(sessaoRequest));
+        SessaoDeVoto sesao = mapper.gerarSessao(sessaoRequest);
 
-        return SessaoMapper.gerarResponse(sesao, pautaService.buscarPauta(sessaoRequest.idPauta()));
+        return mapper.gerarResponse(sessaoRepository.save(sesao), pautaService.buscarPauta(sessaoRequest.idPauta()));
     }
 
     public SessaoComResultadoResponse buscarResultadoDaVotacao(Integer idSessao){
         SessaoDeVoto sessao = buscarSessaoNoBanco(idSessao);
 
-        return SessaoMapper.gerarResponseComResultados(sessao, pautaService.buscarPauta(sessao.getIdDaPauta()));
+        return mapper.gerarResponseComResultados(sessao, pautaService.buscarPauta(sessao.getIdDaPauta()));
     }
 
     public SessaoDeVoto buscarSessaoNoBanco(Integer idSessao) {

@@ -7,19 +7,21 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.exception.ObjetoNaoEnc
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.AssociadoRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AssociadoService {
-    @Autowired
-    AssociadoRepository repository;
+    private final AssociadoRepository repository;
+
+    private final AssociadoMapper mapper;
 
     @Transactional
-    public AssociadoResponse cadastrarAssociado(AssociadoRequest request){
-        Associado associado = AssociadoMapper.gerarAssociado(request);
+    public AssociadoResponse cadastrarAssociado(AssociadoRequest request) {
+        Associado associado = mapper.gerarAssociado(request);
 
-        return AssociadoMapper.gerarResponse(repository.save(associado));
+        return mapper.gerarResponse(repository.save(associado));
     }
 
     public Associado buscarAssociado(Integer idAssociado){

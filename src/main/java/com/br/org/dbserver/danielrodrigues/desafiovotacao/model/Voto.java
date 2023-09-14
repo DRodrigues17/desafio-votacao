@@ -3,13 +3,11 @@ package com.br.org.dbserver.danielrodrigues.desafiovotacao.model;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.Decisao;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
 @Entity
+@Getter
+@EqualsAndHashCode
 @NoArgsConstructor
 public class Voto {
     @Id

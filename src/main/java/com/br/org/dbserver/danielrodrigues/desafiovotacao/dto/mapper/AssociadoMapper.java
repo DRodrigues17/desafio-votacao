@@ -3,10 +3,12 @@ package com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.mapper;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.AssociadoRequest;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.AssociadoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AssociadoMapper {
 
-    public static Associado gerarAssociado(AssociadoRequest request){
+    public Associado gerarAssociado(AssociadoRequest request) {
         return Associado
                 .builder()
                 .cpf(request.cpf())
@@ -14,7 +16,7 @@ public class AssociadoMapper {
                 .build();
     }
 
-    public static AssociadoResponse gerarResponse(Associado associado){
+    public AssociadoResponse gerarResponse(Associado associado) {
         return AssociadoResponse
                 .builder()
                 .cpf(associado.getCpf())

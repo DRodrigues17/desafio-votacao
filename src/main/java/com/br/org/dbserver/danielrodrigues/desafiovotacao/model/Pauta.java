@@ -2,13 +2,11 @@ package com.br.org.dbserver.danielrodrigues.desafiovotacao.model;
 
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPauta;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
+@EqualsAndHashCode
 @NoArgsConstructor
 public class Pauta {
     @Id

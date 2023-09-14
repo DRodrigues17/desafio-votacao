@@ -8,22 +8,22 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Pauta;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPauta;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.PautaRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class PautaService {
-
-    @Autowired
-    PautaRepository repository;
+    private final PautaRepository repository;
+    private final PautaMapper mapper;
 
     @Transactional
     public PautaResponse cadastrarPauta(PautaRequest request) {
-        return PautaMapper.gerarResponse(repository.save(PautaMapper.gerarPauta(request)));
+        return mapper.gerarResponse(repository.save(mapper.gerarPauta(request)));
     }
 
     public PautaResponse buscarPauta(Integer idPauta) {
-        return PautaMapper
+        return mapper
                 .gerarResponse(buscarPautaNoBanco(idPauta));
     }
 

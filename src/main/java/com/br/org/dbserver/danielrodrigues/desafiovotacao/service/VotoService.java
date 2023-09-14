@@ -10,27 +10,26 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Voto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.VotoRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class VotoService {
-    @Autowired
-    VotoRepository votoRepository;
-    @Autowired
-    AssociadoService associadoService;
-    @Autowired
-    SessaoService sessaoService;
+    private final VotoRepository votoRepository;
+    private final AssociadoService associadoService;
+    private final SessaoService sessaoService;
+    private final VotoMapper mapper;
 
     @Transactional
     public VotoResponse votar(VotoRequest request) {
         Associado associado = associadoService.buscarAssociado(request.idAssociado());
         SessaoDeVoto sessao = sessaoService.buscarSessaoNoBanco(request.idSessao());
 
-        Voto voto = VotoMapper.gerarVoto(request, associado, sessao);
+        Voto voto = mapper.gerarVoto(request, associado, sessao);
         fazerValidacoes(associado, sessao);
 
-        return VotoMapper.gerarResponse(votoRepository.save(voto));
+        return mapper.gerarResponse(votoRepository.save(voto));
     }
 
     private void fazerValidacoes(Associado associado, SessaoDeVoto sessao) {

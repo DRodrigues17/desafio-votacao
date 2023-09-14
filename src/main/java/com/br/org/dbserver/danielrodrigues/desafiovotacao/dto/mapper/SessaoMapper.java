@@ -5,12 +5,14 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.PautaResp
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoComResultadoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Component
 public class SessaoMapper {
 
-    public static SessaoDeVoto gerarSessao(SessaoRequest request) {
+    public SessaoDeVoto gerarSessao(SessaoRequest request) {
         if (request.horaDeFechamento().isEmpty()) {
             return SessaoDeVoto.builder()
                     .horaDeAbertura(LocalDateTime.now())
@@ -25,15 +27,7 @@ public class SessaoMapper {
                 .build();
     }
 
-    public static SessaoDeVoto gerarSessao(SessaoResponse response) {
-        return SessaoDeVoto.builder()
-                .horaDeAbertura(LocalDateTime.now())
-                .idDaPauta(response.pauta().id())
-                .horaDeFechamento(response.horaDeFechamento())
-                .build();
-    }
-
-    public static SessaoResponse gerarResponse(SessaoDeVoto sessao, PautaResponse pauta) {
+    public SessaoResponse gerarResponse(SessaoDeVoto sessao, PautaResponse pauta) {
         return SessaoResponse.builder()
                 .idSessao(sessao.getId())
                 .horaDeAbertura(sessao.getHoraDeAbertura())
@@ -43,7 +37,7 @@ public class SessaoMapper {
                 .build();
     }
 
-    public static SessaoComResultadoResponse gerarResponseComResultados(SessaoDeVoto sessao, PautaResponse pauta) {
+    public SessaoComResultadoResponse gerarResponseComResultados(SessaoDeVoto sessao, PautaResponse pauta) {
         return SessaoComResultadoResponse.builder()
                 .idSessao(sessao.getId())
                 .horaDeAbertura(sessao.getHoraDeAbertura())
