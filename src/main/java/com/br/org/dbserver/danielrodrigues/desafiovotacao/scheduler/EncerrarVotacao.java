@@ -26,11 +26,13 @@ public class EncerrarVotacao {
     @Scheduled(fixedRate = 50000)
     private void finalizarSessoesQueJaPassaramDoHorarioDeFechamento() {
         Predicate<SessaoDeVoto> jaPassouDoHorarioDeFechamento = sessao -> LocalDateTime.now().isAfter(sessao.getHoraDeFechamento());
+        Predicate<SessaoDeVoto> sessaoNaoEncerrada = sessao -> !sessao.isEncerrada();
 
         sessaoRepository
                 .findAll()
                 .stream()
                 .filter(jaPassouDoHorarioDeFechamento)
+                .filter(sessaoNaoEncerrada)
                 .forEach(sessao -> {
                     sessao.definirSessaoComoEncerrada();
                     sessaoRepository.save(sessao);

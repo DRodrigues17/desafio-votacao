@@ -25,9 +25,10 @@ public class SessaoDeVoto {
     private LocalDateTime horaDeFechamento;
     private Integer idDaPauta;
 
+    @ElementCollection
     @JsonManagedReference
     @Setter
-    @OneToMany(mappedBy = "sessao")
+    @OneToMany(mappedBy = "sessao", fetch = FetchType.EAGER)
     private List<Voto> votos = new ArrayList<>();
     private boolean encerrada;
 
