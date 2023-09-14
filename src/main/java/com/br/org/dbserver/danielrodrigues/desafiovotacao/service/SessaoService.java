@@ -7,16 +7,17 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoRes
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.SessaoRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
 @Service
-@RequiredArgsConstructor
 public class SessaoService {
 
+    @Autowired
     private SessaoRepository sessaoRepository;
+    @Autowired
     private PautaService pautaService;
 
     @Transactional
@@ -38,7 +39,7 @@ public class SessaoService {
         return SessaoMapper.gerarResponseComResultados(sessao, pautaService.buscarPauta(sessao.getIdDaPauta()));
     }
 
-    private SessaoDeVoto buscarSessaoNoBanco(Integer idSessao){
+    public SessaoDeVoto buscarSessaoNoBanco(Integer idSessao) {
         return sessaoRepository.findById(idSessao)
                 .orElseThrow(() -> new NoSuchElementException("Sessão não Encontrada"));
     }

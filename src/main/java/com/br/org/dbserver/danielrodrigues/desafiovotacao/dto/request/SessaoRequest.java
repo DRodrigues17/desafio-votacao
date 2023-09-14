@@ -1,13 +1,13 @@
 package com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 public record SessaoRequest(
-        @NotBlank
-        int idPauta,
+        @NotNull
+        Integer idPauta,
         Optional<LocalDateTime> horaDeFechamento
 ) {
 }

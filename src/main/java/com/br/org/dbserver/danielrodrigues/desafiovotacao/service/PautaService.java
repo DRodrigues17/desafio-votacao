@@ -7,21 +7,20 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Pauta;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPauta;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.PautaRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
 @Service
-@RequiredArgsConstructor
 public class PautaService {
 
+    @Autowired
     PautaRepository repository;
 
     @Transactional
     public PautaResponse cadastrarPauta(PautaRequest request) {
-        Pauta pauta = PautaMapper.gerarPauta(request);
-        return PautaMapper.gerarResponse(repository.save(pauta));
+        return PautaMapper.gerarResponse(repository.save(PautaMapper.gerarPauta(request)));
     }
 
     public PautaResponse buscarPauta(Integer idPauta) {

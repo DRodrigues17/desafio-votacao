@@ -6,15 +6,15 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoCom
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.service.SessaoService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sessoes")
-@RequiredArgsConstructor
 public class SessaoControllerImpl implements SessaoController {
+    @Autowired
     SessaoService service;
 
     @Override
@@ -23,9 +23,9 @@ public class SessaoControllerImpl implements SessaoController {
         return new ResponseEntity<>(service.abrirUmaSessao(request), HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @Override
-    public ResponseEntity<SessaoComResultadoResponse> buscarResultadoSessao(@PathVariable Integer idSessao) {
-        return ResponseEntity.ok(service.buscarResultadoDaVotacao(idSessao));
+    public ResponseEntity<SessaoComResultadoResponse> buscarResultadoSessao(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.buscarResultadoDaVotacao(id));
     }
 }

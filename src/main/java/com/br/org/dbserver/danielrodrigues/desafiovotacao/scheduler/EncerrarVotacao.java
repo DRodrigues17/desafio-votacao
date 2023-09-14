@@ -5,20 +5,22 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPa
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.SessaoRepository;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.service.PautaService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class EncerrarVotacao {
-    private static final Logger LOGGER = Logger.getLogger(EncerrarVotacao.class.getName());
+    @Autowired
     PautaService pautaService;
-
+    @Autowired
     SessaoRepository sessaoRepository;
 
     @Scheduled(fixedRate = 50000)
@@ -37,7 +39,7 @@ public class EncerrarVotacao {
 
                     pautaService.alterarSituacaoDaPauta(sessao.getIdDaPauta(), situacaoPauta);
 
-                    LOGGER.info("a sessao " + sessao.getId() + " foi encerrada com sucesso no momento " + LocalDateTime.now(ZoneId.systemDefault()));
+                    log.info("a sessao " + sessao.getId() + " foi encerrada com sucesso no momento " + LocalDateTime.now(ZoneId.systemDefault()));
                 });
     }
 }

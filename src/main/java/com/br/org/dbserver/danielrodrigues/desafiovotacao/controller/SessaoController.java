@@ -7,5 +7,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface SessaoController {
     ResponseEntity<SessaoResponse> abrirSessaoDeSesao(SessaoRequest request);
-    ResponseEntity<SessaoComResultadoResponse> buscarResultadoSessao(Integer idSessao);
+
+    ResponseEntity<SessaoComResultadoResponse> buscarResultadoSessao(Integer id);
 }

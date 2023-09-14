@@ -4,17 +4,19 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPa
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Pauta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private final String nome;
-    @Lob
-    private final String descricao;
+    private String nome;
+    private String descricao;
+    @Enumerated(EnumType.STRING)
     @Setter
     private SituacaoPauta situacao;
 

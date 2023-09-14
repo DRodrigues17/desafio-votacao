@@ -5,11 +5,14 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.AssociadoR
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.AssociadoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.AssociadoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
+@Service
 public class AssociadoService {
-
+    @Autowired
     AssociadoRepository repository;
 
     public AssociadoResponse cadastrarAssociado(AssociadoRequest request){

@@ -1,15 +1,15 @@
 package com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request;
 
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.Decisao;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record VotoRequest(
 
-        @NotBlank
+        @NotNull
         Integer idAssociado,
-        @NotBlank
+        @NotNull
         Integer idSessao,
-        @NotBlank
+        @NotNull
         Decisao decisao
 ) {
 }
