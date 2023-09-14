@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "520a4891-139c-47e3-9f0c-21a82f399a84",
+		"name": "desafio-votação",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19878794"
+	},
+	"item": [
+		{
+			"name": "associado",
+			"item": [
+				{
+					"name": "cadastrar associado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"973.932.980-23\",\r\n  \"nome\": \"Daniel Rodrigues\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-base}}/associados",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"associados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrar associado com erro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"933.931.980-23\",\r\n  \"nome\": \" \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-base}}/associados",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"associados"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "voto",
+			"item": [
+				{
+					"name": "votar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idAssociado\": 1,\r\n  \"idSessao\": 1,\r\n  \"decisao\": \"SIM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-base}}/votos",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"votos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tentativa de voto com falha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idAssociado\": 0,\r\n  \"idSessao\": 3,\r\n  \"decisao\": \" \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-base}}/votos",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"votos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sessao",
+			"item": [
+				{
+					"name": "buscar situação da sessão com votos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-base}}/sessoes/1",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"sessoes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar situação de sessão inexistente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-base}}/sessoes/5",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"sessoes",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "abrir sessão sem hora de fechamento definida",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idPauta\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-base}}/sessoes",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"sessoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "abrir sessão com hora de fechamento definida",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idPauta\": 1,\r\n  \"horaDeFechamento\": \"2023-09-15T13:40:03.913Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-base}}/sessoes",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"sessoes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pauta",
+			"item": [
+				{
+					"name": "cadastrar pauta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"uso de uniforme\",\r\n  \"descricao\": \"nessa pauta decidiremos se é necessário ou não o uso de uniforme no home office\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-base}}/pautas",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"pautas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrar pauta com erro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"uniforme\",\r\n  \"descricao\": \"   \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-base}}/pautas",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"pautas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar pauta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-base}}/pautas/1",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"pautas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar pauta inexistente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-base}}/pautas/4",
+							"host": [
+								"{{url-base}}"
+							],
+							"path": [
+								"pautas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url-base",
+			"value": "http://localhost:8080/v1"
+		}
+	]
+}
