@@ -40,7 +40,7 @@ class VotoControllerImplTest {
                 .then().log().all()
                 .contentType(ContentType.JSON)
                 .statusCode(HttpStatus.CREATED.value())
-                .body("idAssociado", equalTo(1))
+                .body("cpfAssociado", equalTo("13093250064"))
                 .body("idSessao", equalTo(1))
                 .body("decisao", equalTo("SIM"));
     }

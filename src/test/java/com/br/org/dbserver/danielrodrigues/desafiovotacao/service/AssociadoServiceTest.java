@@ -44,16 +44,16 @@ class AssociadoServiceTest {
     }
 
     @Test
-    void deveBuscarassociadoComSucesso() {
-        Mockito.when(repository.findById(1)).thenReturn(Optional.of(associado));
+    void deveBuscarAssociadoComSucesso() {
+        Mockito.when(repository.findByCpf("13093250064")).thenReturn(Optional.of(associado));
 
-        assertEquals("Daniel Rodrigues", service.buscarAssociado(1).getNome());
+        assertEquals("Daniel Rodrigues", service.buscarAssociado("13093250064").getNome());
     }
 
     @Test
     void deveLancarExcessaoCasoAssociadoNaoEncontrado() {
-        Mockito.when(repository.findById(1)).thenThrow(ObjetoNaoEncontradoException.class);
+        Mockito.when(repository.findByCpf("1")).thenThrow(ObjetoNaoEncontradoException.class);
 
-        assertThrows(ObjetoNaoEncontradoException.class, () -> service.buscarAssociado(1));
+        assertThrows(ObjetoNaoEncontradoException.class, () -> service.buscarAssociado("1"));
     }
 }

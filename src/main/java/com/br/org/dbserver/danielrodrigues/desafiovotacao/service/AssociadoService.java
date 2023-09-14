@@ -24,8 +24,8 @@ public class AssociadoService {
         return mapper.gerarResponse(repository.save(associado));
     }
 
-    public Associado buscarAssociado(Integer idAssociado){
-        return repository.findById(idAssociado)
-                .orElseThrow(() -> new ObjetoNaoEncontradoException("Associado/a " + idAssociado));
+    public Associado buscarAssociado(String cpfAssociado) {
+        return repository.findByCpf(cpfAssociado)
+                .orElseThrow(() -> new ObjetoNaoEncontradoException("Associado/a " + cpfAssociado));
     }
 }

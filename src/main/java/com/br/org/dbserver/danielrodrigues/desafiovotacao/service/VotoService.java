@@ -23,7 +23,7 @@ public class VotoService {
 
     @Transactional
     public VotoResponse votar(VotoRequest request) {
-        Associado associado = associadoService.buscarAssociado(request.idAssociado());
+        Associado associado = associadoService.buscarAssociado(request.cpfAssociado());
         SessaoDeVoto sessao = sessaoService.buscarSessaoNoBanco(request.idSessao());
 
         Voto voto = mapper.gerarVoto(request, associado, sessao);

@@ -5,7 +5,7 @@ import lombok.Builder;
 
 @Builder
 public record VotoResponse(
-        Integer idAssociado,
+        String cpfAssociado,
         Integer idSessao,
         Decisao decisao
 ) {

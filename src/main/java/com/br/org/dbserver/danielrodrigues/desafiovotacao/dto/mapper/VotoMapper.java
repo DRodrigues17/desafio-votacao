@@ -19,7 +19,7 @@ public class VotoMapper {
 
     public VotoResponse gerarResponse(Voto voto) {
         return VotoResponse.builder()
-                .idAssociado(voto.getAssociado().getId())
+                .cpfAssociado(voto.getAssociado().getCpf())
                 .idSessao(voto.getSessao().getId())
                 .decisao(voto.getDecisao())
                 .build();
