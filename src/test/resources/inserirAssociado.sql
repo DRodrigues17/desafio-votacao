@@ -1,3 +1,3 @@
 INSERT INTO associado
-(cpf, nome)
-VALUES('13093250064', 'Daniel Rodrigues');
+(id, cpf, nome)
+VALUES(1, '13093250064', 'Daniel Rodrigues');

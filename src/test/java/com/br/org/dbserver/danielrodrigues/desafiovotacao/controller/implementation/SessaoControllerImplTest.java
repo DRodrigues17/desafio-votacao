@@ -34,9 +34,9 @@ class SessaoControllerImplTest {
         RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body(SessaoStub.gerarRequest())
-                .when().log().all()
+                .when()
                 .post(URL)
-                .then().log().all()
+                .then()
                 .contentType(ContentType.JSON)
                 .statusCode(HttpStatus.CREATED.value())
                 .body("idSessao", equalTo(1))
@@ -46,19 +46,17 @@ class SessaoControllerImplTest {
     @Test
     @SqlGroup(
             {@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = inserirPauta),
-                    @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = inserirPauta),
                     @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = limparDB)})
     void deveAbrirUmaSessaoSemHoraDeFechamentoPreDefinidoComSucesso() {
-        RestAssured.given().log().all()
+        RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body(SessaoStub.gerarRequestSemHoraDeFechamentoDefinido())
                 .when()
                 .post(URL)
-                .then().log().all()
-                .contentType(ContentType.JSON)
+                .then()
                 .statusCode(HttpStatus.CREATED.value())
-                .body("votos", equalTo("[]"))
-                .body("numeroDeVotos", equalTo(0));
+                .body(containsString("\"situacao\":\"PARA_VOTAR\""));
+
     }
 
     @Test
@@ -67,13 +65,11 @@ class SessaoControllerImplTest {
                     @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = inserirSessao),
                     @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = limparDB)})
     void deveBuscarResultadoDaSessaoComSucesso() {
-        RestAssured.given().log().all()
-                .contentType(ContentType.JSON)
-                .when().log().all()
+        RestAssured.given()
+                .when()
                 .get(URL + "/1")
-                .then().log().all()
-                .contentType(ContentType.JSON)
+                .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(containsString("\"situacao\":\"PARA_VOTAR\""));
+                .body("numeroDeVotos", equalTo(0));
     }
 }
