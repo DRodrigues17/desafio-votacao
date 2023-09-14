@@ -5,11 +5,10 @@ import jakarta.validation.constraints.NotNull;
 
 public record VotoRequest(
 
-        @NotNull
+        @NotNull(message = "é necessário um associado para votar")
         Integer idAssociado,
-        @NotNull
+        @NotNull(message = "é necessário identificar a sessão de voto")
         Integer idSessao,
-        @NotNull
         Decisao decisao
 ) {
 }

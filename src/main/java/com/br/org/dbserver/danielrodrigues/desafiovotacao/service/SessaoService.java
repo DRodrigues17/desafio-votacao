@@ -4,13 +4,12 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.mapper.SessaoMappe
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.SessaoRequest;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoComResultadoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoResponse;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.exception.ObjetoNaoEncontradoException;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.SessaoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.NoSuchElementException;
 
 @Service
 public class SessaoService {
@@ -27,12 +26,6 @@ public class SessaoService {
         return SessaoMapper.gerarResponse(sesao, pautaService.buscarPauta(sessaoRequest.idPauta()));
     }
 
-    public SessaoResponse buscarSessao(Integer idSessao) {
-        SessaoDeVoto sessao = buscarSessaoNoBanco(idSessao);
-
-        return SessaoMapper.gerarResponse(sessao, pautaService.buscarPauta(sessao.getIdDaPauta()));
-    }
-
     public SessaoComResultadoResponse buscarResultadoDaVotacao(Integer idSessao){
         SessaoDeVoto sessao = buscarSessaoNoBanco(idSessao);
 
@@ -41,7 +34,7 @@ public class SessaoService {
 
     public SessaoDeVoto buscarSessaoNoBanco(Integer idSessao) {
         return sessaoRepository.findById(idSessao)
-                .orElseThrow(() -> new NoSuchElementException("Sessão não Encontrada"));
+                .orElseThrow(() -> new ObjetoNaoEncontradoException("Sessão " + idSessao));
     }
 
 }

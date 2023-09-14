@@ -3,14 +3,13 @@ package com.br.org.dbserver.danielrodrigues.desafiovotacao.service;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.mapper.PautaMapper;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.PautaRequest;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.PautaResponse;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.exception.ObjetoNaoEncontradoException;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Pauta;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.SituacaoPauta;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.repository.PautaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.NoSuchElementException;
 
 @Service
 public class PautaService {
@@ -25,15 +24,18 @@ public class PautaService {
 
     public PautaResponse buscarPauta(Integer idPauta) {
         return PautaMapper
-                .gerarResponse(repository.findById(idPauta)
-                        .orElseThrow(() -> new NoSuchElementException("Pauta não Encontrada")));
+                .gerarResponse(buscarPautaNoBanco(idPauta));
     }
 
     @Transactional
     public void alterarSituacaoDaPauta(Integer idPauta, SituacaoPauta situacao) {
-        Pauta pauta = repository.findById(idPauta).orElseThrow(() -> new NoSuchElementException("Pauta não Encontrada"));
+        Pauta pauta = buscarPautaNoBanco(idPauta);
         pauta.setSituacao(situacao);
         repository.save(pauta);
+    }
+
+    private Pauta buscarPautaNoBanco(Integer idPauta) {
+        return repository.findById(idPauta).orElseThrow(() -> new ObjetoNaoEncontradoException("Pauta " + idPauta));
     }
 
 }

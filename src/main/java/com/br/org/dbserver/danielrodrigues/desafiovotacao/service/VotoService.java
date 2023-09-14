@@ -3,6 +3,8 @@ package com.br.org.dbserver.danielrodrigues.desafiovotacao.service;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.mapper.VotoMapper;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.VotoRequest;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.VotoResponse;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.exception.AssociadoJaVotouException;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.exception.SessaoEncerradaException;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Voto;
@@ -33,10 +35,10 @@ public class VotoService {
 
     private void fazerValidacoes(Associado associado, SessaoDeVoto sessao) {
 
-        if (votoRepository.findAll().contains(associado.getId())) {
-            throw new RuntimeException("Esse associado já votou para essa pauta, logo não pode votar novamente");
+        if (votoRepository.existsByAssociadoAndSessao(associado, sessao)) {
+            throw new AssociadoJaVotouException();
         } else if (sessao.isEncerrada()) {
-            throw new RuntimeException("Sessão já encerrada, logo não é mais permitido votar");
+            throw new SessaoEncerradaException(sessao.getId());
         }
     }
 
