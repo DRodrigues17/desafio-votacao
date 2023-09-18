@@ -21,17 +21,16 @@ public class VotoService {
     private final VotoRepository votoRepository;
     private final AssociadoService associadoService;
     private final SessaoService sessaoService;
-    private final VotoMapper mapper;
 
     @Transactional
     public VotoResponse votar(VotoRequest request) {
         Associado associado = associadoService.buscarAssociado(request.cpfAssociado());
         SessaoDeVoto sessao = sessaoService.buscarSessaoNoBanco(request.idSessao());
 
-        Voto voto = mapper.gerarVoto(request, associado, sessao);
+        Voto voto = VotoMapper.gerarVoto(request, associado, sessao);
         fazerValidacoes(associado, sessao);
 
-        return mapper.gerarResponse(votoRepository.save(voto));
+        return VotoMapper.gerarResponse(votoRepository.save(voto));
     }
 
     private void fazerValidacoes(Associado associado, SessaoDeVoto sessao) {

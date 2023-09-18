@@ -15,13 +15,11 @@ import org.springframework.stereotype.Service;
 public class AssociadoService {
     private final AssociadoRepository repository;
 
-    private final AssociadoMapper mapper;
-
     @Transactional
     public AssociadoResponse cadastrarAssociado(AssociadoRequest request) {
-        Associado associado = mapper.gerarAssociado(request);
+        Associado associado = AssociadoMapper.gerarAssociado(request);
 
-        return mapper.gerarResponse(repository.save(associado));
+        return AssociadoMapper.gerarResponse(repository.save(associado));
     }
 
     public Associado buscarAssociado(String cpfAssociado) {

@@ -16,19 +16,18 @@ import org.springframework.stereotype.Service;
 public class SessaoService {
     private final SessaoRepository sessaoRepository;
     private final PautaService pautaService;
-    private final SessaoMapper mapper;
 
     @Transactional
     public SessaoResponse abrirUmaSessao(SessaoRequest sessaoRequest) {
-        SessaoDeVoto sesao = mapper.gerarSessao(sessaoRequest);
+        SessaoDeVoto sesao = SessaoMapper.gerarSessao(sessaoRequest);
 
-        return mapper.gerarResponse(sessaoRepository.save(sesao), pautaService.buscarPauta(sessaoRequest.idPauta()));
+        return SessaoMapper.gerarResponse(sessaoRepository.save(sesao), pautaService.buscarPauta(sessaoRequest.idPauta()));
     }
 
     public SessaoComResultadoResponse buscarResultadoDaVotacao(Integer idSessao){
         SessaoDeVoto sessao = buscarSessaoNoBanco(idSessao);
 
-        return mapper.gerarResponseComResultados(sessao, pautaService.buscarPauta(sessao.getIdDaPauta()));
+        return SessaoMapper.gerarResponseComResultados(sessao, pautaService.buscarPauta(sessao.getIdDaPauta()));
     }
 
     public SessaoDeVoto buscarSessaoNoBanco(Integer idSessao) {

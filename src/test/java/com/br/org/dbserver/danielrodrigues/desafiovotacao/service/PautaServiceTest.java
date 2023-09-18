@@ -26,8 +26,6 @@ class PautaServiceTest {
 
     @Mock
     PautaRepository repository;
-    @Spy
-    PautaMapper mapper;
 
     @InjectMocks
     PautaService service;

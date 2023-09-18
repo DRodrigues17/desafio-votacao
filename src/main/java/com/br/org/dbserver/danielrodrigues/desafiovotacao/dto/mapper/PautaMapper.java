@@ -6,15 +6,15 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Pauta;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PautaMapper {
-    public Pauta gerarPauta(PautaRequest request) {
+public interface PautaMapper {
+    static Pauta gerarPauta(PautaRequest request) {
         return Pauta.builder()
                 .nome(request.nome())
                 .descricao(request.descricao())
                 .build();
     }
 
-    public PautaResponse gerarResponse(Pauta pauta) {
+    static PautaResponse gerarResponse(Pauta pauta) {
         return PautaResponse.builder()
                 .id(pauta.getId())
                 .nome(pauta.getNome())

@@ -13,9 +13,8 @@ class SessaoMapperTest {
 
     @Test
     void deveGerarSessaoComCurtoTempoDeFechamentoCasoNaoSejaPassadoPeloUsuarioNaHoraDoCadastro() {
-        SessaoMapper mapper = new SessaoMapper();
         SessaoRequest request = SessaoStub.gerarRequestSemHoraDeFechamentoDefinido();
-        SessaoDeVoto sessaoDeVoto = mapper.gerarSessao(request);
+        SessaoDeVoto sessaoDeVoto = SessaoMapper.gerarSessao(request);
         assertEquals(LocalDateTime.now().plusMinutes(1), sessaoDeVoto.getHoraDeFechamento());
     }
 }

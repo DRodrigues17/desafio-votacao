@@ -26,8 +26,6 @@ class AssociadoServiceTest {
     Associado associado = AssociadoStub.gerarAssociado();
     @Mock
     private AssociadoRepository repository;
-    @Spy
-    private AssociadoMapper mapper;
     @InjectMocks
     private AssociadoService service;
 

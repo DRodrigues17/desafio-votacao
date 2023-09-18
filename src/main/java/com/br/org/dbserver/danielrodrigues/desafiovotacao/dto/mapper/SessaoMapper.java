@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-public class SessaoMapper {
+public interface SessaoMapper {
 
-    public SessaoDeVoto gerarSessao(SessaoRequest request) {
+    static SessaoDeVoto gerarSessao(SessaoRequest request) {
         if (request.horaDeFechamento().isEmpty()) {
             return SessaoDeVoto.builder()
                     .horaDeAbertura(LocalDateTime.now())
@@ -27,7 +27,7 @@ public class SessaoMapper {
                 .build();
     }
 
-    public SessaoResponse gerarResponse(SessaoDeVoto sessao, PautaResponse pauta) {
+    static SessaoResponse gerarResponse(SessaoDeVoto sessao, PautaResponse pauta) {
         return SessaoResponse.builder()
                 .idSessao(sessao.getId())
                 .horaDeAbertura(sessao.getHoraDeAbertura())
@@ -36,7 +36,7 @@ public class SessaoMapper {
                 .build();
     }
 
-    public SessaoComResultadoResponse gerarResponseComResultados(SessaoDeVoto sessao, PautaResponse pauta) {
+    static SessaoComResultadoResponse gerarResponseComResultados(SessaoDeVoto sessao, PautaResponse pauta) {
         return SessaoComResultadoResponse.builder()
                 .idSessao(sessao.getId())
                 .horaDeAbertura(sessao.getHoraDeAbertura())

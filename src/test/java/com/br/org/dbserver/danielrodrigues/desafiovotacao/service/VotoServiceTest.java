@@ -37,8 +37,6 @@ class VotoServiceTest {
     private AssociadoService associadoService;
     @Mock
     private SessaoService sessaoService;
-    @Spy
-    private VotoMapper mapper;
 
     @Test
     void deveVotarComSucesso() {

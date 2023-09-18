@@ -6,9 +6,9 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AssociadoMapper {
+public interface AssociadoMapper {
 
-    public Associado gerarAssociado(AssociadoRequest request) {
+    static Associado gerarAssociado(AssociadoRequest request) {
         return Associado
                 .builder()
                 .cpf(request.cpf())
@@ -16,7 +16,7 @@ public class AssociadoMapper {
                 .build();
     }
 
-    public AssociadoResponse gerarResponse(Associado associado) {
+    static AssociadoResponse gerarResponse(Associado associado) {
         return AssociadoResponse
                 .builder()
                 .cpf(associado.getCpf())

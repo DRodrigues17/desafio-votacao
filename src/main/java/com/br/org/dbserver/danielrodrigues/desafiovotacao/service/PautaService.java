@@ -15,15 +15,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PautaService {
     private final PautaRepository repository;
-    private final PautaMapper mapper;
 
     @Transactional
     public PautaResponse cadastrarPauta(PautaRequest request) {
-        return mapper.gerarResponse(repository.save(mapper.gerarPauta(request)));
+        return PautaMapper.gerarResponse(repository.save(PautaMapper.gerarPauta(request)));
     }
 
     public PautaResponse buscarPauta(Integer idPauta) {
-        return mapper
+        return PautaMapper
                 .gerarResponse(buscarPautaNoBanco(idPauta));
     }
 
