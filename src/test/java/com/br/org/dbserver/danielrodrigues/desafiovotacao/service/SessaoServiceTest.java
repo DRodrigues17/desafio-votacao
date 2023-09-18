@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class SessaoServiceTest {
@@ -39,7 +40,9 @@ class SessaoServiceTest {
 
     @Test
     void buscarSessaoNoBanco() {
-        Mockito.when(repository.findById(1)).thenThrow(ObjetoNaoEncontradoException.class);
-        assertThrows(ObjetoNaoEncontradoException.class, () -> sessaoService.buscarSessaoNoBanco(1));
+        Mockito.when(repository.findById(1)).thenReturn(Optional.empty());
+
+        ObjetoNaoEncontradoException objetoNaoEncontradoException = assertThrows(ObjetoNaoEncontradoException.class, () -> sessaoService.buscarSessaoNoBanco(1));
+        assertEquals("Sessão 1 não encontrado/a", objetoNaoEncontradoException.getMessage());
     }
 }

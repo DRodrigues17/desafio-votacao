@@ -18,6 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class PautaServiceTest {
@@ -46,8 +48,11 @@ class PautaServiceTest {
 
     @Test
     void deveLancarErroAoBuscarPorPautaInexistente() {
-        Mockito.when(repository.findById(1)).thenThrow(ObjetoNaoEncontradoException.class);
-        assertThrows(ObjetoNaoEncontradoException.class, () -> service.buscarPauta(1));
+        Mockito.when(repository.findById(1)).thenReturn(Optional.empty());
+
+        ObjetoNaoEncontradoException objetoNaoEncontradoException = assertThrows(ObjetoNaoEncontradoException.class,
+                () -> service.buscarPauta(1));
+        assertEquals("Pauta 1 não encontrado/a", objetoNaoEncontradoException.getMessage());
     }
 
     @Test

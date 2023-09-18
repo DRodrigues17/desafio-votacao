@@ -52,8 +52,11 @@ class AssociadoServiceTest {
 
     @Test
     void deveLancarExcessaoCasoAssociadoNaoEncontrado() {
-        Mockito.when(repository.findByCpf("1")).thenThrow(ObjetoNaoEncontradoException.class);
+        Mockito.when(repository.findByCpf("1")).thenReturn(Optional.empty());
 
-        assertThrows(ObjetoNaoEncontradoException.class, () -> service.buscarAssociado("1"));
+        ObjetoNaoEncontradoException objetoNaoEncontradoException = assertThrows(ObjetoNaoEncontradoException.class,
+                () -> service.buscarAssociado("1"));
+        assertEquals("Associado/a 1 não encontrado/a", objetoNaoEncontradoException.getMessage());
+
     }
 }
