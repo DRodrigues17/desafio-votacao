@@ -28,17 +28,12 @@ public class SessaoDeVoto {
     @Setter
     @OneToMany(mappedBy = "sessao", fetch = FetchType.EAGER)
     private List<Voto> votos = new ArrayList<>();
-    private boolean encerrada;
 
     @Builder
     public SessaoDeVoto(LocalDateTime horaDeAbertura, LocalDateTime horaDeFechamento, Integer idDaPauta) {
         this.horaDeAbertura = horaDeAbertura;
         this.horaDeFechamento = horaDeFechamento;
         this.idDaPauta = idDaPauta;
-    }
-
-    public void definirSessaoComoEncerrada() {
-        encerrada = true;
     }
 
     public SituacaoPauta descobrirResultadoDaVotacao() {

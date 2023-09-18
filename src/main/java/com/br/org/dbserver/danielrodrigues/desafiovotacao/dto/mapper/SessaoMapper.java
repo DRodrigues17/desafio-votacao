@@ -32,7 +32,6 @@ public class SessaoMapper {
                 .idSessao(sessao.getId())
                 .horaDeAbertura(sessao.getHoraDeAbertura())
                 .horaDeFechamento(sessao.getHoraDeFechamento())
-                .encerrada(sessao.isEncerrada())
                 .pauta(pauta)
                 .build();
     }
@@ -44,7 +43,6 @@ public class SessaoMapper {
                 .horaDeFechamento(sessao.getHoraDeFechamento())
                 .votos(sessao.getVotos())
                 .numeroDeVotos(sessao.getVotos().size())
-                .encerrada(sessao.isEncerrada())
                 .pauta(pauta)
                 .build();
     }

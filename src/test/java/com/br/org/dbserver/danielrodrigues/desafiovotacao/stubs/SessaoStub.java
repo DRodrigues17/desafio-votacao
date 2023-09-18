@@ -6,8 +6,8 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class SessaoStub {
-    public static SessaoDeVoto gerarSessao() {
+public interface SessaoStub {
+    static SessaoDeVoto gerarSessao() {
         return SessaoDeVoto
                 .builder()
                 .horaDeAbertura(LocalDateTime.now())
@@ -16,11 +16,20 @@ public class SessaoStub {
                 .build();
     }
 
-    public static SessaoRequest gerarRequest() {
+    static SessaoDeVoto gerarSessaoComHoraDeFedchamentoNoPassado() {
+        return SessaoDeVoto
+                .builder()
+                .horaDeAbertura(LocalDateTime.of(2023, 9, 14, 15, 12))
+                .horaDeFechamento(LocalDateTime.of(2023, 9, 15, 15, 12))
+                .idDaPauta(1)
+                .build();
+    }
+
+    static SessaoRequest gerarRequest() {
         return new SessaoRequest(1, Optional.of(LocalDateTime.now().plusMinutes(15)));
     }
 
-    public static SessaoRequest gerarRequestSemHoraDeFechamentoDefinido() {
+    static SessaoRequest gerarRequestSemHoraDeFechamentoDefinido() {
         return new SessaoRequest(1, Optional.empty());
     }
 

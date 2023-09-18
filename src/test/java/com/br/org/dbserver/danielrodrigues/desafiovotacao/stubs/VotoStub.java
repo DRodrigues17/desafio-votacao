@@ -4,8 +4,8 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.VotoReques
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Voto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.enums.Decisao;
 
-public class VotoStub {
-    public static Voto gerarVotoPositivo() {
+public interface VotoStub {
+    static Voto gerarVotoPositivo() {
         return Voto
                 .builder()
                 .associado(AssociadoStub.gerarAssociado())
@@ -14,7 +14,7 @@ public class VotoStub {
                 .build();
     }
 
-    public static Voto gerarVotoNegativo() {
+    static Voto gerarVotoNegativo() {
         return Voto
                 .builder()
                 .associado(AssociadoStub.gerarAssociado())
@@ -23,11 +23,11 @@ public class VotoStub {
                 .build();
     }
 
-    public static VotoRequest gerarRequestPositivo() {
+    static VotoRequest gerarRequestPositivo() {
         return new VotoRequest("13093250064", 1, Decisao.SIM);
     }
 
-    public static VotoRequest gerarRequestNegativo() {
+    static VotoRequest gerarRequestNegativo() {
         return new VotoRequest("13093250064", 1, Decisao.NAO);
     }
 

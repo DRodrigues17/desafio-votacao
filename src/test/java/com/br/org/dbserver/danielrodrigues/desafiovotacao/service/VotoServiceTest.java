@@ -77,9 +77,12 @@ class VotoServiceTest {
     @Test
     void deveDarErroAoVotarPoisSessaoJaExpirou() {
         Mockito.when(associadoService.buscarAssociado("13093250064")).thenReturn(associado);
-        Mockito.when(sessaoService.buscarSessaoNoBanco(1)).thenReturn(sessao);
-        sessao.definirSessaoComoEncerrada();
-        Mockito.when(votoRepository.existsByAssociadoAndSessao(associado, sessao)).thenReturn(false);
+
+        SessaoDeVoto sessaoFechada = SessaoStub.gerarSessaoComHoraDeFedchamentoNoPassado();
+
+        Mockito.when(sessaoService.buscarSessaoNoBanco(1)).thenReturn(sessaoFechada);
+
+        Mockito.when(votoRepository.existsByAssociadoAndSessao(associado, sessaoFechada)).thenReturn(false);
 
         assertThrows(SessaoEncerradaException.class, () -> votoService.votar(VotoStub.gerarRequestNegativo()));
     }

@@ -13,7 +13,6 @@ public record SessaoComResultadoResponse(
         LocalDateTime horaDeFechamento,
         List<Voto> votos,
         int numeroDeVotos,
-        PautaResponse pauta,
-        boolean encerrada
+        PautaResponse pauta
 ) {
 }

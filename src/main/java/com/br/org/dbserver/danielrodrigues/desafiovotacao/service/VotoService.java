@@ -13,6 +13,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class VotoService {
@@ -36,7 +38,7 @@ public class VotoService {
 
         if (votoRepository.existsByAssociadoAndSessao(associado, sessao)) {
             throw new AssociadoJaVotouException();
-        } else if (sessao.isEncerrada()) {
+        } else if (LocalDateTime.now().isAfter(sessao.getHoraDeFechamento())) {
             throw new SessaoEncerradaException(sessao.getId());
         }
     }

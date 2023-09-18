@@ -10,7 +10,6 @@ public record SessaoResponse(
         Integer idSessao,
         LocalDateTime horaDeAbertura,
         LocalDateTime horaDeFechamento,
-        PautaResponse pauta,
-        boolean encerrada
+        PautaResponse pauta
 ) {
 }

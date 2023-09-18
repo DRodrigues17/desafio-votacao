@@ -39,8 +39,7 @@ class SessaoControllerImplTest {
                 .then()
                 .contentType(ContentType.JSON)
                 .statusCode(HttpStatus.CREATED.value())
-                .body("idSessao", equalTo(1))
-                .body("encerrada", equalTo(false));
+                .body("idSessao", equalTo(1));
     }
 
     @Test

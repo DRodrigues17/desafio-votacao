@@ -3,9 +3,9 @@ package com.br.org.dbserver.danielrodrigues.desafiovotacao.stubs;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.AssociadoRequest;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
 
-public class AssociadoStub {
+public interface AssociadoStub {
 
-    public static Associado gerarAssociado() {
+    static Associado gerarAssociado() {
         return Associado
                 .builder()
                 .cpf("13093250064")
@@ -13,7 +13,7 @@ public class AssociadoStub {
                 .build();
     }
 
-    public static AssociadoRequest gerarRequest() {
+    static AssociadoRequest gerarRequest() {
         return new AssociadoRequest("13093250064", "Daniel Rodrigues");
     }
 
