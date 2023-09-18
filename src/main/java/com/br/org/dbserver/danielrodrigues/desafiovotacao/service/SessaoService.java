@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class SessaoService {
@@ -26,6 +28,10 @@ public class SessaoService {
 
     public SessaoComResultadoResponse buscarResultadoDaVotacao(Integer idSessao){
         SessaoDeVoto sessao = buscarSessaoNoBanco(idSessao);
+
+        if (LocalDateTime.now().isAfter(sessao.getHoraDeFechamento())) {
+            pautaService.alterarSituacaoDaPauta(sessao.getIdDaPauta(), sessao.descobrirResultadoDaVotacao());
+        }
 
         return SessaoMapper.gerarResponseComResultados(sessao, pautaService.buscarPauta(sessao.getIdDaPauta()));
     }
