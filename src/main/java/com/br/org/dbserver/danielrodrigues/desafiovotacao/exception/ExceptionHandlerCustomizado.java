@@ -14,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestControllerAdvice
-public class CustomizedExceptionHandler {
+public class ExceptionHandlerCustomizado {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErroDTO> tratarErrosInesperados(RuntimeException erroInesperado) {

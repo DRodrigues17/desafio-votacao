@@ -6,16 +6,16 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoCom
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.service.SessaoService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sessoes")
+@RequiredArgsConstructor
 public class SessaoControllerImpl implements SessaoController {
-    @Autowired
-    SessaoService service;
+    private final SessaoService service;
 
     @Override
     @PostMapping

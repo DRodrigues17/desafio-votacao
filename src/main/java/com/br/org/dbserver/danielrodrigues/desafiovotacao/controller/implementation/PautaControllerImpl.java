@@ -5,16 +5,16 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.PautaReque
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.PautaResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.service.PautaService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pautas")
+@RequiredArgsConstructor
 public class PautaControllerImpl implements PautaController {
-    @Autowired
-    PautaService service;
+    private final PautaService service;
 
     @Override
     @PostMapping

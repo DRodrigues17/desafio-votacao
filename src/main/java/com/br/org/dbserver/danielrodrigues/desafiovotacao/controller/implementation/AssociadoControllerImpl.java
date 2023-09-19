@@ -5,7 +5,7 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.AssociadoR
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.AssociadoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.service.AssociadoService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/associados")
+@RequiredArgsConstructor
 public class AssociadoControllerImpl implements AssociadoController {
-    @Autowired
-    AssociadoService service;
+    private final AssociadoService service;
 
     @PostMapping
     @Override

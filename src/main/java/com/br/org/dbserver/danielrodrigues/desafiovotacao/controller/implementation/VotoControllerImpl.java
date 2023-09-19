@@ -5,7 +5,7 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.VotoReques
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.VotoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.service.VotoService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/votos")
+@RequiredArgsConstructor
 public class VotoControllerImpl implements VotoController {
-    @Autowired
-    VotoService service;
+    private final VotoService service;
 
     @PostMapping
     @Override

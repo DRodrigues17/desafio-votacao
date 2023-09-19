@@ -9,11 +9,12 @@ public enum Decisao {
 
     @JsonCreator
     public static Decisao gerarDecisaoApartirDoValor(String valor) {
-        for (Decisao decisao : Decisao.values()) {
-            if (decisao.name().equalsIgnoreCase(valor)) {
-                return decisao;
-            }
+        if (valor.equalsIgnoreCase(NAO.name()) || valor.equalsIgnoreCase("Não")) {
+            return NAO;
+        } else if (valor.equalsIgnoreCase(SIM.name())) {
+            return SIM;
         }
+
         throw new DecisaoInvalidaException(valor);
     }
 }
