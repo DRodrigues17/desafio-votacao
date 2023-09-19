@@ -26,7 +26,7 @@ Agora falando em testes, é a mesma coisa, mas com um dos seguintes comandos:
 
 > ./gradlew test
 
-Depois disso, você pode importar via postman a coleção na pasta resources ou acessar o swagger na seguinte url ou usar a coleção
-do postman que está na pasta resources para testar os endpoints e retornos.
+Depois disso, você pode importar via postman a coleção na pasta resources ou acessar o swagger na seguinte url para testar os endpoints e retornos. Voce também pode usar a coleção
+do postman que está na presente na wiki, basta pegar o cógio detacado na página "coleção do postman e salvar num arquivo json
 
 > http://localhost:8080/v1/swagger-ui/index.html#/
