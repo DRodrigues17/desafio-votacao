@@ -1,6 +1,5 @@
 package com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response;
 
-import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Voto;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,7 @@ public record SessaoComResultadoResponse(
         Integer idSessao,
         LocalDateTime horaDeAbertura,
         LocalDateTime horaDeFechamento,
-        List<Voto> votos,
+        List<VotoResponse> votos,
         int numeroDeVotos,
         PautaResponse pauta
 ) {

@@ -5,9 +5,7 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.VotoRespo
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Voto;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface VotoMapper {
     static Voto gerarVoto(VotoRequest request, Associado associado, SessaoDeVoto sessao) {
         return Voto.builder()

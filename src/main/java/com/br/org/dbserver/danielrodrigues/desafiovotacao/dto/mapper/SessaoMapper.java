@@ -4,12 +4,14 @@ import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.SessaoRequ
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.PautaResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoComResultadoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.SessaoResponse;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.VotoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.SessaoDeVoto;
-import org.springframework.stereotype.Component;
+import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Voto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Component
 public interface SessaoMapper {
 
     static SessaoDeVoto gerarSessao(SessaoRequest request) {
@@ -41,9 +43,19 @@ public interface SessaoMapper {
                 .idSessao(sessao.getId())
                 .horaDeAbertura(sessao.getHoraDeAbertura())
                 .horaDeFechamento(sessao.getHoraDeFechamento())
-                .votos(sessao.getVotos())
+                .votos(gerarListaDeVotosResponse(sessao.getVotos()))
                 .numeroDeVotos(sessao.getVotos().size())
                 .pauta(pauta)
                 .build();
+    }
+
+    private static List<VotoResponse> gerarListaDeVotosResponse(List<Voto> votosDaEntidade) {
+        List<VotoResponse> listaDeVotosResponse = new ArrayList<>();
+
+        votosDaEntidade.forEach(voto ->
+                listaDeVotosResponse.add(VotoMapper.gerarResponse(voto))
+        );
+
+        return listaDeVotosResponse;
     }
 }

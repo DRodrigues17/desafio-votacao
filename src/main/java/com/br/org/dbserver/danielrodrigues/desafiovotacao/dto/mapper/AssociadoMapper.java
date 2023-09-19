@@ -3,9 +3,7 @@ package com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.mapper;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.request.AssociadoRequest;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.dto.response.AssociadoResponse;
 import com.br.org.dbserver.danielrodrigues.desafiovotacao.model.Associado;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface AssociadoMapper {
 
     static Associado gerarAssociado(AssociadoRequest request) {
