@@ -31,4 +31,4 @@ do postman que está na presente na wiki, basta pegar o cógio detacado na pági
 
 > http://localhost:8080/v1/swagger-ui/index.html#/
 
-## Na wiki está a documentação do projeto, explicando as decisões tomadas para o projeto, fluxogramas do projeto e diagramas do baco de dados
+## [Na wiki está a documentação do projeto, explicando as decisões tomadas para o projeto, fluxogramas do projeto e diagramas do baco de dados](https://github.com/DRodrigues17/desafio-votacao/wiki)
